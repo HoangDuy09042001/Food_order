@@ -1,7 +1,7 @@
 <?php
 include_once 'database.php';
-$result = mysqli_query($conn,"SELECT * FROM orderfoodform");
-$res=mysqli_query($conn,"SELECT SUM(foodPrice) AS `total` FROM orderfoodform");
+$result = mysqli_query($conn, "SELECT * FROM orderfoodform");
+$res=mysqli_query($conn, "SELECT SUM(foodPrice) AS `total` FROM orderfoodform");
 $data=mysqli_fetch_array($res);
 ?>
 <!DOCTYPE html>

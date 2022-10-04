@@ -26,7 +26,10 @@ document.querySelector('.submit-btn').addEventListener('click',()=>{
         method:"post",
         data: {bill: JSON.stringify(bill)},
         success:function(res){
-            alert("You've ordered food! Please remember to recieve our call");
+            if(res.includes('Add successfully created')){
+                alert('Add successfully created');
+            }
+          
         }
     })
 })

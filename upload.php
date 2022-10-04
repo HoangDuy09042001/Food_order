@@ -4,7 +4,7 @@ require_once 'dbConfig.php';
  
 // If file upload form is submitted 
 $status = $statusMsg = ''; 
-if(isset($_POST["submit"])){ 
+if (isset($_POST["submit"])) { 
     $foodName = $_POST["foodName"];
     $foodPrice= (double) $_POST["foodPrice"];
     $foodDes= $_POST["foodDes"];

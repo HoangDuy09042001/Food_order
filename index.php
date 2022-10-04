@@ -38,6 +38,9 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
                     <li>
                         <a href="contact.php">Contact</a>
                     </li>
+                    <li>
+                        <a href="">History Order</a>
+                    </li>
                 </ul>
             </div>
 
