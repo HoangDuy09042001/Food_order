@@ -151,7 +151,7 @@ fieldset{
     float: left;
     background-color: white;
     border-radius: 15px;
-    min-height: 160px;
+    height: 160px;
     background-size: cover;
     background-position: center;
     transition: 0.5s;
@@ -162,13 +162,14 @@ fieldset{
     float: left;
 }
 .food-menu-desc{
+    color:white;
     width: 70%;
     float: left;
     margin-left: 8%;
     display: none;
 }
 .food-menu-box:hover .food-menu-desc {
-    background-color: rgba(234, 231, 219, 0.3);
+    background-color: rgb(22 22 18 / 30%);
     display: block;
 }
 

@@ -12,7 +12,6 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
 
     <!-- Link our CSS file -->
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/form/order.css">
 </head>
 
 <body>

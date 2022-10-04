@@ -30,7 +30,7 @@ html {
     margin: 5% 3%;
   }
   .content {
-    background-image: url('https://sg-live-01.slatic.net/p/dea609ca6967c3328bb48bcbb166e42d.jpg');
+    background-image: url('https://static.lag.vn/upload/news/16/10/26/6ac7a25010bcf1e91781c405caa9608a_pic-25-1477197998928gif_MWCK.gif');
     background-size: cover;
     background-position: center;
   }
@@ -264,3 +264,21 @@ html {
       content: none;
     }
   }
+.phone {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 30px;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.3);
+    outline: none;
+    padding: 5px;
+    color: white;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    width:80%;
+}
+th {
+  color: black;
+}
