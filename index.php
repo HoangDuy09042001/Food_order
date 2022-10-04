@@ -1,3 +1,7 @@
+<?php
+require_once 'dbConfig.php'; 
+$result = $db->query("SELECT * FROM images ORDER BY id DESC"); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +12,7 @@
 
     <!-- Link our CSS file -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/form/order.css">
 </head>
 
 <body>
@@ -23,16 +28,16 @@
             <div class="menu text-right">
                 <ul>
                     <li>
-                        <a href="index.html">Home</a>
+                        <a href="index.php">Home</a>
                     </li>
                     <li>
-                        <a href="categories.html">Categories</a>
+                        <a href="categories.php">Categories</a>
                     </li>
                     <li>
-                        <a href="foods.html">Foods</a>
+                        <a href="foods.php">Foods</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="contact.php">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -90,7 +95,7 @@
     <!-- Categories Section Ends Here -->
 
     <!-- fOOD MEnu Section Starts Here -->
-    <section class="food-menu">
+    <!-- <section class="food-menu">
         <div class="container">
             <h2 class="text-center">Food Menu</h2>
 
@@ -196,7 +201,6 @@
                 </div>
             </div>
 
-
             <div class="clearfix"></div>
 
             
@@ -206,6 +210,39 @@
         <p class="text-center">
             <a href="#">See All Foods</a>
         </p>
+    </section> -->
+    <section class="food-menu">
+        <div class="container">
+            <h2 class="text-center">Food Menu</h2>
+
+            <!-- Thu Nghiem Start  -->
+            <?php
+            $i=0;
+            $sum=0;
+            while ($row = mysqli_fetch_array($result)) {
+            ?>
+            <div class="food-menu-box" style="background-image:url('data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>');">
+
+                <div class="food-menu-desc">
+                    <h4 class="food-name"><?php echo $row['foodName']; ?></h4>
+                    <p class="food-price"><?php echo "$".$row['foodPrice']; ?></p>
+                    <p class="food-detail">
+                       <?php echo $row['foodDes']; ?>
+                    </p>
+                    <br>
+                </div>
+            </div>
+            <?php
+            $i++;
+            }
+            ?>
+
+            <!-- Thu Nghiem End  -->
+            
+            
+            <div class="clearfix"></div>
+        </div>
+        
     </section>
     <!-- fOOD Menu Section Ends Here -->
 
@@ -230,7 +267,7 @@
     <!-- footer Section Starts Here -->
     <section class="footer">
         <div class="container text-center">
-            <p>All rights reserved. Designed By <a href="#">Vijay Thapa</a></p>
+            <p>All rights reserved. Designed By <a href="#">Hoàng Duy</a></p>
         </div>
     </section>
     <!-- footer Section Ends Here -->

@@ -1,5 +1,5 @@
 /* 
-    Author: Vijay Thapa;
+    Author: Hoàng Duy;
     Theme: Restaurant Food Order;
     version: 1.0;
 */
@@ -55,6 +55,7 @@ a:hover{
     border-radius: 5px;
 }
 .btn-primary{
+    text-align: center;
     background-color: #ff6b81;
     color: white;
     cursor: pointer;
@@ -150,17 +151,25 @@ fieldset{
     float: left;
     background-color: white;
     border-radius: 15px;
+    min-height: 160px;
+    background-size: cover;
+    background-position: center;
+    transition: 0.5s;
 }
 
 .food-menu-img{
     width: 20%;
     float: left;
 }
-
 .food-menu-desc{
     width: 70%;
     float: left;
     margin-left: 8%;
+    display: none;
+}
+.food-menu-box:hover .food-menu-desc {
+    background-color: rgba(234, 231, 219, 0.3);
+    display: block;
 }
 
 .food-price{
@@ -169,7 +178,14 @@ fieldset{
 }
 .food-detail{
     font-size: 1rem;
-    color: #747d8c;
+    color: white;
+    display: block;/* or inline-block */
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+    max-height: 3.6em;
+    line-height: 1.8em;
+    min-height: 3.6em;
 }
 
 
@@ -199,8 +215,37 @@ fieldset{
     margin-bottom: 1%; 
     font-weight: bold;
 }
-
-
+.quantity {
+    display: flex;
+    justify-content: space-between;
+}
+.order-quantity {
+    width: 50%;
+}
+.minus,
+.plus {
+    cursor: pointer;
+}
+.submit-order {
+    width:80%;
+    height: 30px;
+    background-color: #ff6b81;
+    margin: auto;
+    display: flex;
+    text-align: center;
+    position: relative;
+}
+.submit-order a {
+    color: #ececec;
+    position: absolute;
+    left: 50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+}
+.submit-order:hover {
+    background-color: #ff4757;
+    cursor: pointer;
+}
 
 /* CSS for Mobile Size or Smaller Screen */
 
@@ -256,4 +301,16 @@ fieldset{
     .order{
         width: 100%;
     }
+    .btn-primary {
+        width: 50%;
+    }
+    input.btn.btn-primary {
+        width: 91%;
+    }
+}
+.quantity-number {
+    background-color: #ff6b81;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
 }
