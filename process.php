@@ -28,7 +28,7 @@ $conn->close();
 if (isset($_POST['bill'])){
   $res=mysqli_query($conn, "SELECT MAX(orderfood) AS maxorderfood FROM bill");
   $i=0;
-  while($row = mysqli_fetch_array($res)){
+  while ($row = mysqli_fetch_array($res)) {
       $maxorderfood = $row['maxorderfood'];
     $i++;
   }

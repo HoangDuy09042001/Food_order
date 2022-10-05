@@ -130,7 +130,24 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
         </div>
     </section>
     <!-- social Section Ends Here -->
-
+    <div class="scroll" style=" position: fixed;
+    top: 70vh;
+    right: 5%;
+    width: 30px;
+    height: 30px;
+    background-color: #e911d6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    box-shadow: 1px 1px 12px 1px #0986ed;
+    color: wheat;">
+        <div class="icon-scroll">
+           <span class="minus"><i class="fa-solid fa-chevron-up"></i>
+           <a href="#"></a>
+           </span>
+        </div>
+    </div>
     <!-- footer Section Starts Here -->
     <section class="footer">
         <div class="container text-center">
@@ -141,4 +158,16 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
 
 </body>
 <script src="./javascript/foods.js"></script>
+<script>
+    window.addEventListener('scroll', ()=>{
+        if(window.scrollY > 200){
+            document.querySelector('.scroll').style.display = "flex";
+        }else{   
+            document.querySelector('.scroll').style.display = "none";
+        }
+    })
+    document.querySelector('.scroll').addEventListener('click', ()=>{
+        document.querySelector('.scroll a').click();
+    })
+</script>
 </html>

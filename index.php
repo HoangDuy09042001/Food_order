@@ -12,6 +12,7 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
 
     <!-- Link our CSS file -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -265,7 +266,25 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
         </div>
     </section>
     <!-- social Section Ends Here -->
-
+    
+    <div class="scroll" style=" position: fixed;
+    top: 70vh;
+    right: 5%;
+    width: 30px;
+    height: 30px;
+    background-color: #e911d6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    box-shadow: 1px 1px 12px 1px #0986ed;
+    color: wheat;">
+        <div class="icon-scroll">
+           <span class="minus"><i class="fa-solid fa-chevron-up"></i>
+           <a href="#"></a>
+           </span>
+        </div>
+    </div>
     <!-- footer Section Starts Here -->
     <section class="footer">
         <div class="container text-center">
@@ -275,4 +294,16 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
     <!-- footer Section Ends Here -->
 
 </body>
+<script>
+    window.addEventListener('scroll', ()=>{
+        if(window.scrollY > 200){
+            document.querySelector('.scroll').style.display = "flex";
+        }else{   
+            document.querySelector('.scroll').style.display = "none";
+        }
+    })
+    document.querySelector('.scroll').addEventListener('click', ()=>{
+        document.querySelector('.scroll a').click();
+    })
+</script>
 </html>
