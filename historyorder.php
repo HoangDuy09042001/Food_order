@@ -33,7 +33,7 @@ INNER JOIN images ON historyorder.foodname = images.foodName
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/form/historyorder.css">
+    <link rel="stylesheet" href="css/form/history.css">
 </head>
 <body>
 <div class="table-users">
@@ -44,24 +44,28 @@ INNER JOIN images ON historyorder.foodname = images.foodName
          <th>Picture</th>
          <th>Name</th>
          <th>Price</th>
-         <th width="230">Quanty</th>
+         <th>Quanty</th>
       </tr>
       <?php
                 $i=0;
-                $total=0;
                 while ($row = mysqli_fetch_array($result)) {
                 ?>
                  <tr>
                     <td><img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" alt="" /></td>
                     <td><?php echo $row['foodname'];?></td>
-                    <td><?php echo $row['price'];?></td>
+                    <td><?php echo "$".$row['price'];?></td>
                     <td><?php echo $row['quantity'];?></td>
                 </tr>
                 <?php
                 $i++;
                 $total = $row['total'];
+                $date = $row['created'];
             }
             ?>
+   <tfoot><tr>
+      <td colspan="3" class="total" style=""><?php echo "Total :$".$total;?></td>
+      <td colspan="1" class="date" style=""><?php echo $date;?></td>
+   </tr></tfoot>
    </table>
 </div>
 </body>
