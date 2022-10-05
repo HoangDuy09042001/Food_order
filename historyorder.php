@@ -59,7 +59,6 @@ INNER JOIN images ON bill.foodname = images.foodName ORDER BY bill.orderfood DES
                     <td><?php echo $row['quantity'];?></td>
                 </tr>
                 <?php
-               //  $i++;
                 $total = $row['total'];
                 $date = $row['created'];
 
