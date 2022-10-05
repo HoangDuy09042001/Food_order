@@ -44,11 +44,18 @@ INNER JOIN images ON bill.foodname = images.foodName ORDER BY bill.orderfood DES
                 $prev=$maxorder;
                 while ($row = mysqli_fetch_array($result)) {
                   $noworder = $row['orderfood'];
-                  if($noworder != $prev){
+                  if ($noworder != $prev){
+                     if ($prev==$maxorder){
+                        echo '<tr style="">
+                        <td colspan="3" class="total" style="font-weight:bold;">Lastest total: $'.$total.'</td>
+                        <td colspan="1" class="date" style="font-weight:bold;">'.$date.'</td>
+                        </tr>'; 
+                     }else{
                      echo '<tr style="">
                      <td colspan="3" class="total" style="font-weight:bold;">Total: $'.$total.'</td>
                      <td colspan="1" class="date" style="font-weight:bold;">'.$date.'</td>
                      </tr>';
+                     }
                      $prev = $noworder;
                    }
                 ?>
@@ -66,7 +73,7 @@ INNER JOIN images ON bill.foodname = images.foodName ORDER BY bill.orderfood DES
                 ?>
    
    <tr>
-      <td colspan="3" class="total" style="font-weight:bold;"><?php echo "Lastest Total: $".$total;?></td>
+      <td colspan="3" class="total" style="font-weight:bold;"><?php echo "Total: $".$total;?></td>
       <td colspan="1" class="date" style="font-weight:bold;"><?php echo $date;?></td>
    </tr>
    <?php
