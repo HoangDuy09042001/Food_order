@@ -9,24 +9,15 @@ LIMIT 1");
 while ($row = mysqli_fetch_array($maxresult)) {
    $maxorder = $row['orderfood'];
 }   
-$result = mysqli_query($conn, " SELECT historyorder.foodname,
-historyorder.price,
-historyorder.quantity,
-historyorder.total,
-historyorder.orderfood,
-historyorder.created,
+$result = mysqli_query($conn, " SELECT bill.foodname,
+bill.price,
+bill.quantity,
+bill.total,
+bill.orderfood,
+bill.created,
 images.image 
-FROM
-( SELECT 
-foodname,
-price,
-quantity,
-total,
-orderfood,
-created
 FROM bill 
-WHERE orderfood <= ( SELECT MAX(orderfood) FROM bill )) AS historyorder
-INNER JOIN images ON historyorder.foodname = images.foodName ORDER BY historyorder.orderfood DESC
+INNER JOIN images ON bill.foodname = images.foodName ORDER BY bill.orderfood DESC
 ");
 ?>
 <!DOCTYPE html>
