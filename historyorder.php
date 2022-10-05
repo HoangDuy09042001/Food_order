@@ -47,8 +47,8 @@ INNER JOIN images ON bill.foodname = images.foodName ORDER BY bill.orderfood DES
                   if ($noworder != $prev){
                      if ($prev==$maxorder){
                         echo '<tr style="">
-                        <td colspan="3" class="total" style="font-weight:bold;">Lastest total: $'.$total.'</td>
-                        <td colspan="1" class="date" style="font-weight:bold;">'.$date.'</td>
+                        <td colspan="3" class="total" style="font-weight:bold;color:red;">Lastest total: $'.$total.'</td>
+                        <td colspan="1" class="date" style="font-weight:bold;color:red;">'.$date.'</td>
                         </tr>'; 
                      }else{
                      echo '<tr style="">
