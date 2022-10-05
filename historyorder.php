@@ -1,29 +1,32 @@
 <?php
 require_once 'database.php'; 
-// $result = mysqli_query($conn, "SELECT 
-// foodname,
-// price,
-// quantity,
-// total,
-// created
-// FROM bill 
-// WHERE orderfood = ( SELECT MAX(orderfood) FROM bill )");
+$maxresult = mysqli_query($conn, "SELECT 
+orderfood
+FROM bill 
+WHERE orderfood = ( SELECT MAX(orderfood) FROM bill )
+ORDER BY id ASC
+LIMIT 1");
+while ($row = mysqli_fetch_array($maxresult)) {
+   $maxorder = $row['orderfood'];
+}   
 $result = mysqli_query($conn, " SELECT historyorder.foodname,
 historyorder.price,
 historyorder.quantity,
 historyorder.total,
+historyorder.orderfood,
 historyorder.created,
 images.image 
 FROM
-(SELECT 
+( SELECT 
 foodname,
 price,
 quantity,
 total,
+orderfood,
 created
 FROM bill 
-WHERE orderfood = ( SELECT MAX(orderfood) FROM bill )) AS historyorder
-INNER JOIN images ON historyorder.foodname = images.foodName
+WHERE orderfood <= ( SELECT MAX(orderfood) FROM bill )) AS historyorder
+INNER JOIN images ON historyorder.foodname = images.foodName ORDER BY historyorder.orderfood DESC
 ");
 ?>
 <!DOCTYPE html>
@@ -37,7 +40,7 @@ INNER JOIN images ON historyorder.foodname = images.foodName
 </head>
 <body>
 <div class="table-users">
-   <div class="header">Users</div>
+   <div class="header">Order list</div>
    
    <table cellspacing="0">
       <tr>
@@ -47,8 +50,16 @@ INNER JOIN images ON historyorder.foodname = images.foodName
          <th>Quanty</th>
       </tr>
       <?php
-                $i=0;
+                $prev=$maxorder;
                 while ($row = mysqli_fetch_array($result)) {
+                  $noworder = $row['orderfood'];
+                  if($noworder != $prev){
+                     echo '<tr style="">
+                     <td colspan="3" class="total" style="font-weight:bold;">Total: $'.$total.'</td>
+                     <td colspan="1" class="date" style="font-weight:bold;">'.$date.'</td>
+                     </tr>';
+                     $prev = $noworder;
+                   }
                 ?>
                  <tr>
                     <td><img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" alt="" /></td>
@@ -57,15 +68,20 @@ INNER JOIN images ON historyorder.foodname = images.foodName
                     <td><?php echo $row['quantity'];?></td>
                 </tr>
                 <?php
-                $i++;
+               //  $i++;
                 $total = $row['total'];
                 $date = $row['created'];
-            }
-            ?>
-   <tfoot><tr>
-      <td colspan="3" class="total" style=""><?php echo "Total :$".$total;?></td>
-      <td colspan="1" class="date" style=""><?php echo $date;?></td>
-   </tr></tfoot>
+
+                }
+                ?>
+   
+   <tr>
+      <td colspan="3" class="total" style="font-weight:bold;"><?php echo "Lastest Total: $".$total;?></td>
+      <td colspan="1" class="date" style="font-weight:bold;"><?php echo $date;?></td>
+   </tr>
+   <?php
+   
+   ?>
    </table>
 </div>
 </body>

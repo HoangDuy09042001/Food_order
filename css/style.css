@@ -155,6 +155,7 @@ fieldset{
     background-size: cover;
     background-position: center;
     transition: 0.5s;
+    user-select: none;
 }
 
 .food-menu-img{

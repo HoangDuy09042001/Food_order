@@ -105,6 +105,9 @@ body {
     table td:last-child {
         text-align: left;
     }
+    td.date:before {
+        content: "Date:";
+      }
   }
   @media screen and (max-width: 500px) {
     .header {

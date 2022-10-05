@@ -40,6 +40,9 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
                     <li>
                         <a href="contact.php">Contact</a>
                     </li>
+                    <li>
+                        <a href="historyorder.php">HistoryOrder</a>
+                    </li>
                 </ul>
             </div>
 
@@ -130,18 +133,7 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
         </div>
     </section>
     <!-- social Section Ends Here -->
-    <div class="scroll" style=" position: fixed;
-    top: 70vh;
-    right: 5%;
-    width: 30px;
-    height: 30px;
-    background-color: #e911d6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 100%;
-    box-shadow: 1px 1px 12px 1px #0986ed;
-    color: wheat;">
+    <div class="scroll" style="">
         <div class="icon-scroll">
            <span class="minus"><i class="fa-solid fa-chevron-up"></i>
            <a href="#"></a>
