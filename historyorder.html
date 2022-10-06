@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="css/form/history.css">
+</head>
+<body>
+<div class="table-users">
+   <div class="header">Order list</div>
+   
+   <table cellspacing="0" class="historical"><tr><th>Picture</th><th>Name</th><th>Price</th><th>Quanty</th></tr></table>
+</div>
+</body>
+<script>
+   const history = 'history';
+    if(document.querySelector("table").innerHTML==='<tbody><tr><th>Picture</th><th>Name</th><th>Price</th><th>Quanty</th></tr></tbody>'){
+                    $.ajax({
+                       url:"process.php",
+                       method:"post",
+                       data: {history: JSON.stringify(history)},
+                       success:function(res){
+                       document.querySelector("table").innerHTML='<tr><th>Picture</th><th>Name</th><th>Price</th><th>Quanty</th></tr>'+res;
+                       }
+                    })
+                 }
+</script>
+</html>

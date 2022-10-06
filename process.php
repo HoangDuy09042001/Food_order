@@ -129,6 +129,61 @@ if (isset($_POST['item']))
 </div>';
   }
  }
- 
+ if(isset($_POST['history'])){
+  $maxresult = mysqli_query($conn, "SELECT 
+  orderfood
+  FROM bill 
+  WHERE orderfood = ( SELECT MAX(orderfood) FROM bill )
+  ORDER BY id ASC
+  LIMIT 1");
+  while ($row = mysqli_fetch_array($maxresult)) {
+     $maxorder = $row['orderfood'];
+  }   
+  $result = mysqli_query($conn, " SELECT bill.foodname,
+  bill.price,
+  bill.quantity,
+  bill.total,
+  bill.orderfood,
+  bill.created,
+  images.image 
+  FROM bill 
+  INNER JOIN images ON bill.foodname = images.foodName ORDER BY bill.orderfood DESC
+  ");
+
+$prev=$maxorder;
+while ($row = mysqli_fetch_array($result)) {
+  $noworder = $row['orderfood'];
+  if ($noworder != $prev){
+     if ($prev==$maxorder){
+        echo '<tr style="">
+        <td colspan="3" class="total" style="font-weight:bold;color:red;">Lastest total: $'.$total.'</td>
+        <td colspan="1" class="date" style="font-weight:bold;color:red;">'.$date.'</td>
+        </tr>'; 
+     }else{
+     echo '<tr style="">
+     <td colspan="3" class="total" style="font-weight:bold;">Total: $'.$total.'</td>
+     <td colspan="1" class="date" style="font-weight:bold;">'.$date.'</td>
+     </tr>';
+     }
+     $prev = $noworder;
+   }
+
+
+echo '<tr>
+    <td><img src="data:image/jpg;charset=utf8;base64,' .base64_encode($row['image']). '" alt="" /></td>
+    <td>' .$row['foodname']. '</td>
+    <td>$' .$row['price']. '</td>
+    <td>'. $row['quantity']. '</td>
+</tr>';
+$total = $row['total'];
+$date = $row['created'];
+
+}
+
+echo '<tr>
+<td colspan="3" class="total" style="font-weight:bold;">Total: $' .$total. '</td>
+<td colspan="1" class="date" style="font-weight:bold;">' .$date. '</td>
+</tr>';
+ }
 ?>
 
