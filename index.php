@@ -64,35 +64,47 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
     <!-- fOOD sEARCH Section Ends Here -->
 
     <!-- CAtegories Section Starts Here -->
-    <section class="categories">
+    <!-- <section class="categories">
         <div class="container">
             <h2 class="text-center">Explore Foods</h2>
 
-            <a href="category-foods.html">
+            <span>
             <div class="box-3 float-container">
                 <img src="images/pizza.jpg" alt="Pizza" class="img-responsive img-curve">
 
                 <h3 class="float-text text-white">Pizza</h3>
             </div>
-            </a>
+            </span>
 
-            <a href="#">
+            <span>
             <div class="box-3 float-container">
-                <img src="images/burger.jpg" alt="Burger" class="img-responsive img-curve">
+                <img src="https://www.chuphinhsanpham.vn/wp-content/uploads/2016/07/chup-hinh-do-an-do-uong-food-67.jpg" alt="Burger" class="img-responsive img-curve">
 
                 <h3 class="float-text text-white">Burger</h3>
             </div>
-            </a>
+            </span>
 
-            <a href="#">
+            <span>
             <div class="box-3 float-container">
                 <img src="images/momo.jpg" alt="Momo" class="img-responsive img-curve">
 
                 <h3 class="float-text text-white">Momo</h3>
             </div>
-            </a>
+            </span>
+
 
             <div class="clearfix"></div>
+        </div>
+    </section> -->
+    <section class="categories">
+      <div class="category">
+         <h1>Drink</h1>
+      </div>
+      <div class="category">
+        
+        </div>
+        <div class="category">
+        
         </div>
     </section>
     <section class="food-menu">
@@ -175,5 +187,12 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
     document.querySelector('.scroll').addEventListener('click', ()=>{
         document.querySelector('.scroll a').click();
     })
+    // console.log(document.querySelectorAll(".float-container")[0].querySelector('img').src);
+    // document.querySelectorAll(".float-container")[0].querySelector('img').addEventListener('click', ()=>{
+    //     let src = document.querySelectorAll(".float-container")[0].querySelector('img').src;
+    //     document.querySelectorAll(".float-container")[0].querySelector('img').src = 
+    //     (src==='http://localhost/food-order/images/pizza.jpg') ? 
+    //     'http://localhost/food-order/images/burger.jpg': 'http://localhost/food-order/images/pizza.jpg';
+    // })
 </script>
 </html>

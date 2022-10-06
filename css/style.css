@@ -330,3 +330,12 @@ fieldset{
     box-shadow: 1px 1px 12px 1px #0986ed;
     color: wheat;
 }
+.categories {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.category {
+    width: 25%;
+    height: 25vh;
+}
