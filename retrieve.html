@@ -120,7 +120,7 @@ const foods = [];
 const length = foodPrices.length;
 for(let i = 0; i < length; i++) {
     const foodname = foodNames[i].innerText;
-    const price = +foodPrices[i].innerText;
+    const price = +foodPrices[i].innerText.replace('$','');
     const quantity = +foodQuantys[i].innerText;
     const food = {
         foodname,

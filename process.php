@@ -28,7 +28,7 @@ $conn->close();
 }
 if(isset($_POST['foodpage'])){
   $it = json_decode($_POST['foodpage'], true);
-  $result = $db->query("SELECT * FROM images "); 
+  $result = $conn->query("SELECT * FROM images "); 
   while ($row = mysqli_fetch_array($result)) {
     echo '<div class="food-menu-box" style="background-image:url(\'data:image/jpg;charset=utf8;base64,' .base64_encode($row['image']). '\');">
 
