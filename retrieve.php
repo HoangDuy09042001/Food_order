@@ -33,10 +33,10 @@ $data=mysqli_fetch_array($res);
                         <a href="categories.php">Categories</a>
                     </li>
                     <li>
-                        <a href="foods.php">Foods</a>
+                        <a href="foods.html">Foods</a>
                     </li>
                     <li>
-                        <a href="contact.php">Contact</a>
+                        <a href="contact.html">Contact</a>
                     </li>
                 </ul>
             </div>
