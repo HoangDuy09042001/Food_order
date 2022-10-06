@@ -51,7 +51,7 @@
                 orderList.pop();
               }
             setTimeout(()=>{
-                document.querySelector('.submit-order a').setAttribute("href", "http://localhost/food-order/retrieve.php");
+                document.querySelector('.submit-order a').setAttribute("href", "http://localhost/food-order/retrieve.html");
                 document.querySelector('.submit-order a').click();
             },3000);
         }

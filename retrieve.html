@@ -1,11 +1,5 @@
-<?php
-include_once 'database.php';
-$result = mysqli_query($conn, "SELECT * FROM orderfoodform");
-$res=mysqli_query($conn, "SELECT SUM(foodPrice) AS `total` FROM orderfoodform");
-$data=mysqli_fetch_array($res);
-?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
  <head>
  <link rel="stylesheet" href="styles.css">   
  <title> Retrive data</title>
@@ -60,9 +54,7 @@ $data=mysqli_fetch_array($res);
     <!-- fOOD sEARCH Section Ends Here -->
 <div class="content">
     <div style="background-color:rgba(0,0,0,0);">
-        <?php
-        if (mysqli_num_rows($result) > 0) {
-        ?>
+        
           <table class="responsive-table">
               <caption style="color:white;"> Order Table</caption>
         <thead>
@@ -73,32 +65,9 @@ $data=mysqli_fetch_array($res);
               </tr>
         </thead>
         <tbody>
-        <?php
-        $i=0;
-        $sum=0;
-        while($row = mysqli_fetch_array($result)) {
-        ?>
-        <tr>
-            <td class="foodname" data-title="FoodName"><?php echo $row["foodName"]; ?></td>
-            <td class="foodprice" data-title="FoodPrice"><?php echo $row["foodPrice"]; ?></td>
-            <td class="foodquanty" data-title="FoodQuanty" data-type="currency" ><?php echo $row["foodQuanty"]; ?></td>
-            <?php
-            $pricepro = $row["foodPrice"]*$row["foodQuanty"];
-            $sum+=$pricepro;
-            ?>
-        </tr>
-        <?php
-        $i++;
-        }
-        ?>
+
         </tbody>
         </table>
-         <?php
-        }
-        else{
-            echo "No result found";
-        }
-        ?>
         <table style="height:25vh;width:100%">
             <tr>
                 <th scope="col" style="">Total</th>
@@ -106,7 +75,7 @@ $data=mysqli_fetch_array($res);
                 <th scope="col" style="">Your phone</th>
             </tr>
             <tr>
-                <td style="text-align:center;font-size:50px;color:white;" class="total"><?php echo "$".$sum;?></td>
+                <td style="text-align:center;font-size:50px;color:white;" class="total"></td>
                 <td style="display:block;height:100%;">
                     <div style="height:50%; margin-left:20%;"><input type="radio" value="card" name="paymethod">   credit card</input></div>
                     <div style="height:50%; margin-left:20%;"><input  type="radio" value="cash" name="paymethod">    cash</input></div>
@@ -118,5 +87,67 @@ $data=mysqli_fetch_array($res);
     </div>
 </div>
  </body>
- <script src="./javascript/order.js"></script>
+ <script>
+    const retrievepage = 'retrievepage';
+    if(document.querySelector("tbody").innerText===''){
+                    console.log('Love you');
+                    $.ajax({
+                       url:"process.php",
+                       method:"post",
+                       data: {retrievepage: JSON.stringify(retrievepage)},
+                       success:function(res){
+                        console.log(res);
+                       document.querySelector("tbody").innerHTML=res;
+                       }
+                    })
+    }
+    window.addEventListener("load", ()=>{
+        const prices = document.querySelectorAll("td.foodprice");
+        const quanties = document.querySelectorAll("td.foodquanty");
+        let sum =0;
+        for(var i=0; i<quanties.length; i++){
+           sum+= (+prices[i].innerText.replace("$",""))*(+quanties[i].innerText);
+        }
+        document.querySelector('td.total').innerText = '$'+sum;
+    });
+    setTimeout(()=>{
+        const bill = [];
+const foodNames = document.querySelectorAll('.foodname');
+const foodPrices = document.querySelectorAll('.foodprice');
+const foodQuantys = document.querySelectorAll('.foodquanty');
+const total = +document.querySelector('.total').innerText.replace('$','');
+const foods = [];
+const length = foodPrices.length;
+for(let i = 0; i < length; i++) {
+    const foodname = foodNames[i].innerText;
+    const price = +foodPrices[i].innerText;
+    const quantity = +foodQuantys[i].innerText;
+    const food = {
+        foodname,
+        price,
+        quantity
+    }
+    foods.push(food);       
+}
+document.querySelector('.submit-btn').addEventListener('click',()=>{
+    const phone = document.querySelector('.phone').value;
+    const payment = $("input[name='paymethod']:checked").val();
+    bill.push(foods,total,payment,phone);
+    console.log(bill);
+    $.ajax({
+        url:"process.php",
+        method:"post",
+        data: {bill: JSON.stringify(bill)},
+        success:function(res){
+            if(res.includes('Add successfully created')){
+                alert('Add successfully created');
+            }
+          
+        }
+    })
+})
+
+    },2000);
+ </script>
+ <!-- <script src="./javascript/order.js"></script> -->
 </html>

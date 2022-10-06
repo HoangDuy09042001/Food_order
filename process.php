@@ -26,6 +26,51 @@ if (isset($_POST['list']))
 }
 $conn->close();
 }
+if(isset($_POST['foodpage'])){
+  $it = json_decode($_POST['foodpage'], true);
+  $result = $db->query("SELECT * FROM images "); 
+  while ($row = mysqli_fetch_array($result)) {
+    echo '<div class="food-menu-box" style="background-image:url(\'data:image/jpg;charset=utf8;base64,' .base64_encode($row['image']). '\');">
+
+    <div class="food-menu-desc">
+        <h4 class="food-name">' .$row['foodName']. '</h4>
+        <p class="food-price">$' .$row['foodPrice']. '</p>
+        <p class="food-detail">' .$row['foodDes']. '</p>
+        <br>
+       <div class="quantity">
+            <div class="order-quantity btn btn-primary"><a href="#" class="btn btn-primary">Order Now</a></div>
+            <div class="quantity-number">
+                <span class="minus"><i class="fa-solid fa-chevron-left"></i></span>
+                <span class="quantity-product">0</span>
+                <span class="plus"><i class="fa-solid fa-chevron-right"></i></span>
+            </div>
+       </div>
+    </div>
+</div>';
+  }
+ }
+ if(isset($_POST['retrievepage'])){
+  $result = mysqli_query($conn, "SELECT * FROM orderfoodform");
+  $res=mysqli_query($conn, "SELECT SUM(foodPrice) AS `total` FROM orderfoodform");
+  $data=mysqli_fetch_array($res);
+    $it = json_decode($_POST['retrievepage'], true);
+    if (mysqli_num_rows($result) > 0) {
+        $sum=0;
+        while($row = mysqli_fetch_array($result)) {
+        echo '
+        <tr>
+            <td class="foodname" data-title="FoodName">' .$row["foodName"]. '</td>
+            <td class="foodprice" data-title="FoodPrice">$' .$row["foodPrice"]. '</td>
+            <td class="foodquanty" data-title="FoodQuanty" data-type="currency" >' .$row["foodQuanty"]. '</td>
+            </tr>';
+            $pricepro = $row["foodPrice"]*$row["foodQuanty"];
+            $sum+=$pricepro;
+
+        
+           }
+        }
+
+}
 if (isset($_POST['bill'])){
   $res=mysqli_query($conn, "SELECT MAX(orderfood) AS maxorderfood FROM bill");
   $i=0;
@@ -84,28 +129,6 @@ if (isset($_POST['item']))
 </div>';
   }
  }
- if(isset($_POST['foodpage'])){
-  $it = json_decode($_POST['foodpage'], true);
-  $result = $db->query("SELECT * FROM images "); 
-  while ($row = mysqli_fetch_array($result)) {
-    echo '<div class="food-menu-box" style="background-image:url(\'data:image/jpg;charset=utf8;base64,' .base64_encode($row['image']). '\');">
-
-    <div class="food-menu-desc">
-        <h4 class="food-name">' .$row['foodName']. '</h4>
-        <p class="food-price">$' .$row['foodPrice']. '</p>
-        <p class="food-detail">' .$row['foodDes']. '</p>
-        <br>
-       <div class="quantity">
-            <div class="order-quantity btn btn-primary"><a href="#" class="btn btn-primary">Order Now</a></div>
-            <div class="quantity-number">
-                <span class="minus"><i class="fa-solid fa-chevron-left"></i></span>
-                <span class="quantity-product">0</span>
-                <span class="plus"><i class="fa-solid fa-chevron-right"></i></span>
-            </div>
-       </div>
-    </div>
-</div>';
-  }
- }
+ 
 ?>
 
