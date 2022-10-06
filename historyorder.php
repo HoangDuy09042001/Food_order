@@ -74,7 +74,7 @@ INNER JOIN images ON bill.foodname = images.foodName ORDER BY bill.orderfood DES
    
    <tr>
       <td colspan="3" class="total" style="font-weight:bold;"><?php echo "Total: $".$total;?></td>
-      <td colspan="1" class="date" style="font-weight:bold;"><?php echo $date;?></td>
+      <td colspan="1" class="date" style="font-weight:bold;"><?php echo $date; ?></td>
    </tr>
    <?php
    
