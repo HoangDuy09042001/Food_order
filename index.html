@@ -1,7 +1,3 @@
-<?php
-require_once 'dbConfig.php'; 
-$result = $db->query("SELECT * FROM images ORDER BY id DESC"); 
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +25,7 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
             <div class="menu text-right">
                 <ul>
                     <li>
-                        <a href="index.php">Home</a>
+                        <a href="index.html">Home</a>
                     </li>
                     <li>
                         <a href="categories.php">Categories</a>
@@ -81,23 +77,6 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
             <h2 class="text-center">Food Menu</h2>
 
             <!-- Thu Nghiem Start  -->
-            <?php
-            while ($row = mysqli_fetch_array($result)) {
-            ?>
-            <div class="food-menu-box" style="background-image:url('data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row["image"]); ?>');">
-
-                <div class="food-menu-desc">
-                    <h4 class="food-name"><?php echo $row['foodName']; ?></h4>
-                    <p class="food-price"><?php echo "$".$row['foodPrice']; ?></p>
-                    <p class="food-detail">
-                       <?php echo $row['foodDes']; ?>
-                    </p>
-                    <br>
-                </div>
-            </div>
-            <?php
-            }
-            ?>
 
             <!-- Thu Nghiem End  -->
             
@@ -184,11 +163,24 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
     document.querySelectorAll(".category")[0].addEventListener('click', hanleClickType[0]);
     document.querySelectorAll(".category")[1].addEventListener('click', hanleClickType[1]);
     document.querySelectorAll(".category")[2].addEventListener('click', hanleClickType[2]);
+    
+    const loadpage = 'loadpage';
+    if(document.querySelector(".food-menu .container").innerText==='Food Menu'){
+                    console.log('Love you');
+                    $.ajax({
+                       url:"process.php",
+                       method:"post",
+                       data: {loadpage: JSON.stringify(loadpage)},
+                       success:function(res){
+                       document.querySelector(".food-menu .container").innerHTML='<h2 class="text-center">Food Menu</h2>'+res+'<div class="clearfix"></div>';
+                       }
+                    })
+    }
+
     const categories = document.querySelectorAll(".category");
     const listCate = ['Appetizer','Maincourses','Desserts','Smoothie','Juice','Alcohol','Hamburger','Sausage','Chip']
     for(const category of categories) {
         category.addEventListener('click', ()=>{
-            const check = false;
             listCate.forEach((item)=>{
                 if(item===category.querySelector('h1').innerText) {
                     console.log(item);
@@ -197,9 +189,9 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
                        method:"post",
                        data: {item: JSON.stringify(item)},
                        success:function(res){
-                       document.querySelector(".food-menu .container").innerHTML=res+'<div class="clearfix"></div>';
-                }
-            })
+                       document.querySelector(".food-menu .container").innerHTML='<h2 class="text-center">Food Menu</h2>'+res+'<div class="clearfix"></div>';
+                       }
+                    })
                 }
             })
         })

@@ -29,7 +29,7 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
             <div class="menu text-right">
                 <ul>
                     <li>
-                        <a href="index.php">Home</a>
+                        <a href="index.html">Home</a>
                     </li>
                     <li>
                         <a href="categories.php">Categories</a>

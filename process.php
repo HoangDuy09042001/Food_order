@@ -69,5 +69,20 @@ if (isset($_POST['item']))
 </div>';
   }
  }
+ if(isset($_POST['loadpage'])){
+  $it = json_decode($_POST['loadpage'], true);
+  $result = $db->query("SELECT * FROM images "); 
+  while ($row = mysqli_fetch_array($result)) {
+    echo '<div class="food-menu-box" style="background-image:url(\'data:image/jpg;charset=utf8;base64,'.base64_encode($row["image"]).'\');">
+
+    <div class="food-menu-desc">
+        <h4 class="food-name">'. $row['foodName'] . '</h4>
+        <p class="food-price">$'.$row['foodPrice'] . '</p>
+        <p class="food-detail">' . $row['foodDes'] . '</p>
+        <br>
+    </div>
+</div>';
+  }
+ }
 ?>
 
