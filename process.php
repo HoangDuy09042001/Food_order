@@ -1,5 +1,6 @@
 <?php
     include_once 'database.php';
+    require_once 'dbConfig.php'; 
   
 if (isset($_POST['list']))
  {
@@ -52,5 +53,21 @@ if (isset($_POST['bill'])){
   }
   $conn->close();
 }
+if (isset($_POST['item']))
+ {
+  $it = json_decode($_POST['item'], true);
+  $result = $db->query("SELECT * FROM images WHERE typeFood='$it'"); 
+  while ($row = mysqli_fetch_array($result)) {
+    echo '<div class="food-menu-box" style="background-image:url(\'data:image/jpg;charset=utf8;base64,'.base64_encode($row["image"]).'\');">
+
+    <div class="food-menu-desc">
+        <h4 class="food-name">'. $row['foodName'] . '</h4>
+        <p class="food-price">$'.$row['foodPrice'] . '</p>
+        <p class="food-detail">' . $row['foodDes'] . '</p>
+        <br>
+    </div>
+</div>';
+  }
+ }
 ?>
 

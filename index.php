@@ -11,7 +11,8 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
     <title>Restaurant Website</title>
 
     <!-- Link our CSS file -->
-    <link rel="stylesheet" href="css/style.css">
+    <script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
@@ -61,50 +62,18 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
 
         </div>
     </section>
-    <!-- fOOD sEARCH Section Ends Here -->
-
-    <!-- CAtegories Section Starts Here -->
-    <!-- <section class="categories">
-        <div class="container">
-            <h2 class="text-center">Explore Foods</h2>
-
-            <span>
-            <div class="box-3 float-container">
-                <img src="images/pizza.jpg" alt="Pizza" class="img-responsive img-curve">
-
-                <h3 class="float-text text-white">Pizza</h3>
-            </div>
-            </span>
-
-            <span>
-            <div class="box-3 float-container">
-                <img src="https://www.chuphinhsanpham.vn/wp-content/uploads/2016/07/chup-hinh-do-an-do-uong-food-67.jpg" alt="Burger" class="img-responsive img-curve">
-
-                <h3 class="float-text text-white">Burger</h3>
-            </div>
-            </span>
-
-            <span>
-            <div class="box-3 float-container">
-                <img src="images/momo.jpg" alt="Momo" class="img-responsive img-curve">
-
-                <h3 class="float-text text-white">Momo</h3>
-            </div>
-            </span>
-
-
-            <div class="clearfix"></div>
-        </div>
-    </section> -->
-    <section class="categories">
-      <div class="category">
-         <h1>Drink</h1>
-      </div>
-      <div class="category">
-        
-        </div>
-        <div class="category">
-        
+    <section class="categories-type">
+        <h1>Categories</h1>
+        <div class="categories">
+          <div class="category" style="background-image:url('./images/food.jpg')">
+             <h1>Food</h1>
+          </div>
+          <div class="category" style="background-image:url('./images/drink.jpg')">
+             <h1>Drink</h1>
+          </div>
+          <div class="category" style="background-image:url('./images/fastfood.jpg')">
+             <h1>FastFood</h1>
+          </div>
         </div>
     </section>
     <section class="food-menu">
@@ -113,11 +82,9 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
 
             <!-- Thu Nghiem Start  -->
             <?php
-            $i=0;
-            $sum=0;
             while ($row = mysqli_fetch_array($result)) {
             ?>
-            <div class="food-menu-box" style="background-image:url('data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>');">
+            <div class="food-menu-box" style="background-image:url('data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row["image"]); ?>');">
 
                 <div class="food-menu-desc">
                     <h4 class="food-name"><?php echo $row['foodName']; ?></h4>
@@ -129,7 +96,6 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
                 </div>
             </div>
             <?php
-            $i++;
             }
             ?>
 
@@ -187,12 +153,56 @@ $result = $db->query("SELECT * FROM images ORDER BY id DESC");
     document.querySelector('.scroll').addEventListener('click', ()=>{
         document.querySelector('.scroll a').click();
     })
-    // console.log(document.querySelectorAll(".float-container")[0].querySelector('img').src);
-    // document.querySelectorAll(".float-container")[0].querySelector('img').addEventListener('click', ()=>{
-    //     let src = document.querySelectorAll(".float-container")[0].querySelector('img').src;
-    //     document.querySelectorAll(".float-container")[0].querySelector('img').src = 
-    //     (src==='http://localhost/food-order/images/pizza.jpg') ? 
-    //     'http://localhost/food-order/images/burger.jpg': 'http://localhost/food-order/images/pizza.jpg';
-    // })
+    const hanleClickType = [()=>{
+        if(document.querySelectorAll(".category")[0].style.backgroundImage==='url("./images/food.jpg")'){
+            document.querySelectorAll(".category")[0].style.backgroundImage = 'url("./images/appetizer.jpg")';
+            document.querySelectorAll(".category h1")[0].innerText = 'Appetizer';
+            document.querySelectorAll(".category")[1].style.backgroundImage = 'url("./images/maincourses.jpg")';
+            document.querySelectorAll(".category h1")[1].innerText = 'Maincourses';
+            document.querySelectorAll(".category")[2].style.backgroundImage = 'url("./images/desserts.jpg")';
+            document.querySelectorAll(".category h1")[2].innerText = 'Desserts';
+        }
+    },()=>{
+        if(document.querySelectorAll(".category")[1].style.backgroundImage==='url("./images/drink.jpg")'){
+            document.querySelectorAll(".category")[0].style.backgroundImage = 'url("./images/smoothie.jpg")';
+            document.querySelectorAll(".category h1")[0].innerText = 'Smoothie';
+            document.querySelectorAll(".category")[1].style.backgroundImage = 'url("./images/juice.jpg")';
+            document.querySelectorAll(".category h1")[1].innerText = 'Juice';
+            document.querySelectorAll(".category")[2].style.backgroundImage = 'url("./images/alcohol.jpg")';
+            document.querySelectorAll(".category h1")[2].innerText = 'Alcohol';
+        }
+    },()=>{
+        if(document.querySelectorAll(".category")[2].style.backgroundImage==='url("./images/fastfood.jpg")'){
+            document.querySelectorAll(".category")[0].style.backgroundImage = 'url("./images/hamburger.jpg")';
+            document.querySelectorAll(".category h1")[0].innerText = 'Hamburger';
+            document.querySelectorAll(".category")[1].style.backgroundImage = 'url("./images/sausage.jpg")';
+            document.querySelectorAll(".category h1")[1].innerText = 'Sausage';
+            document.querySelectorAll(".category")[2].style.backgroundImage = 'url("./images/chip.jpg")';
+            document.querySelectorAll(".category h1")[2].innerText = 'Chip';
+        }
+    }]
+    document.querySelectorAll(".category")[0].addEventListener('click', hanleClickType[0]);
+    document.querySelectorAll(".category")[1].addEventListener('click', hanleClickType[1]);
+    document.querySelectorAll(".category")[2].addEventListener('click', hanleClickType[2]);
+    const categories = document.querySelectorAll(".category");
+    const listCate = ['Appetizer','Maincourses','Desserts','Smoothie','Juice','Alcohol','Hamburger','Sausage','Chip']
+    for(const category of categories) {
+        category.addEventListener('click', ()=>{
+            const check = false;
+            listCate.forEach((item)=>{
+                if(item===category.querySelector('h1').innerText) {
+                    console.log(item);
+                    $.ajax({
+                       url:"process.php",
+                       method:"post",
+                       data: {item: JSON.stringify(item)},
+                       success:function(res){
+                       document.querySelector(".food-menu .container").innerHTML=res+'<div class="clearfix"></div>';
+                }
+            })
+                }
+            })
+        })
+    }
 </script>
 </html>

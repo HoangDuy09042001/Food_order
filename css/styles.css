@@ -250,8 +250,50 @@ fieldset{
 }
 
 /* CSS for Mobile Size or Smaller Screen */
-
+.categories {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.category {
+    width: 25%;
+    height: 25vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    border-radius: 5px;
+}
+.category h1 {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ececec;
+    text-shadow: 1px 1px black;
+}
+.categories-type h1:nth-child(1) {
+    text-align: center;
+    font-size: 32px;
+    margin-top:5%;
+}
 @media only screen and (max-width:768px){
+    .categories {
+        display: block;
+    }
+    .category {
+        margin: auto;
+        width: 70%;
+        margin-bottom: 4%;
+    }
+    .categories-type h1:nth-child(1) {
+        margin-top: 15%;
+    }
+    .categories .category h1 {
+        font-size: 30px;
+    }
+    .category h1 {
+        top: 35%;
+    }
     .logo{
         width: 80%;
         float: none;
@@ -278,7 +320,7 @@ fieldset{
     }
 
     .categories{
-        padding: 20% 0;
+        padding: 5% 0;
     }
     h2{
         margin-bottom: 10%;
@@ -330,3 +372,4 @@ fieldset{
     box-shadow: 1px 1px 12px 1px #0986ed;
     color: wheat;
 }
+
