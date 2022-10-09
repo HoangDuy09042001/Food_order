@@ -182,18 +182,22 @@
         category.addEventListener('click', ()=>{
             listCate.forEach((item)=>{
                 if(item===category.querySelector('h1').innerText) {
-                    console.log(item);
                     $.ajax({
                        url:"process.php",
                        method:"post",
                        data: {item: JSON.stringify(item)},
                        success:function(res){
                        document.querySelector(".food-menu .container").innerHTML='<h2 class="text-center">Food Menu</h2>'+res+'<div class="clearfix"></div>';
+                       for(const i of categories){
+                          i.querySelector('h1').style.color='white';
+                        }
+                        category.querySelector('h1').style.color='#ff6b81';
                        }
                     })
                 }
             })
         })
     }
+    console.log('Process')
 </script>
 </html>

@@ -96,7 +96,6 @@
                        method:"post",
                        data: {retrievepage: JSON.stringify(retrievepage)},
                        success:function(res){
-                        console.log(res);
                        document.querySelector("tbody").innerHTML=res;
                        }
                     })
