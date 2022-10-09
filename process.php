@@ -133,6 +133,26 @@ if (isset($_POST['item']))
     $i++;
   }
  }
+ if(isset($_POST['search'])){
+  $search = json_decode($_POST['search'], true);
+  $result = $db->query("SELECT * FROM images ORDER BY foodPrice ASC"); 
+  $i=0;
+  while ($row = mysqli_fetch_array($result)) {
+      $name = $row['foodName'];
+      if($name ===''){
+        print_r($name);
+      }else{
+        if($i<5){
+          if (str_contains(strtolower($name), strtolower($search))) {
+            echo '<div class="search-content-item">'.$name.'</div>';
+            $i++;
+          }
+  
+        }
+
+      }
+  }
+ } 
  if(isset($_POST['history'])){
   $maxresult = mysqli_query($conn, "SELECT 
   orderfood

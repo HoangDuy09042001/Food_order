@@ -8,7 +8,7 @@
 
     <!-- Link our CSS file -->
     <script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
@@ -48,16 +48,19 @@
     <!-- Navbar Section Ends Here -->
 
     <!-- fOOD sEARCH Section Starts Here -->
-    <section class="food-search text-center">
-        <div class="container">
-            
-            <form action="food-search.html" method="POST">
-                <input type="search" name="search" placeholder="Search for Food.." required>
-                <input type="submit" name="submit" value="Search" class="btn btn-primary">
-            </form>
-
+    <section class="food-search-part">
+        <div class="search-food">
+                <div class="search-food-input">
+                        <input type="text" class="">
+                        <div class="search-icon">
+                            <div><i class="fa-solid fa-magnifying-glass"></i></div>
+                        </div>
+                </div>     
+        </div>
+        <div class="search-content">
         </div>
     </section>
+
     <section class="categories-type">
         <h1>Categories</h1>
         <div class="categories">
@@ -105,7 +108,7 @@
     </section>
     <!-- social Section Ends Here -->
     
-    <div class="scroll" style="">
+    <div class="scroll">
         <div class="icon-scroll">
            <span class="minus"><i class="fa-solid fa-chevron-up"></i>
            <a href="#"></a>
@@ -200,6 +203,45 @@
             })
         })
     }
-    console.log('Process')
+    const sendRequest = ()=>{
+        const search = document.querySelector('.search-food-input input').value;
+        if(search===''){
+            document.querySelector('.search-content').innerHTML = '';
+        }else{
+            $.ajax({
+                           url:"process.php",
+                           method:"post",
+                           data: {search: JSON.stringify(search)},
+                           success:function(res){
+                            document.querySelector('.search-content').innerHTML = ''+res;
+                           }
+                        })
+        }
+
+    }
+    document.querySelector('.search-food-input input').addEventListener('keyup', ()=>{
+        sendRequest();
+       
+    })
+    window.addEventListener('click', function(e){ 
+       if(document.querySelector('.categories-type').contains(e.target) 
+         && !document.querySelectorAll('.category')[0].contains(e.target) 
+         && !document.querySelectorAll('.category')[1].contains(e.target)
+         && !document.querySelectorAll('.category')[2].contains(e.target)
+       ) {
+         document.querySelector('.text-right ul li a').click();
+         console.log(e.target);
+       } 
+       if (document.querySelector('.search-food').contains(e.target) || document.querySelector('.search-content').contains(e.target)){
+           // search-content Clicked in box
+       } else{
+        document.querySelector('.search-content').innerHTML = '';
+        document.querySelector('.search-food-input input').value = '';
+       }
+   })
+    const searchBox = document.querySelector('.search-icon');
+    searchBox.addEventListener('click',()=>{
+        sendRequest();
+    })
 </script>
 </html>
