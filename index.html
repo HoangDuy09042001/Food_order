@@ -187,11 +187,13 @@
                        method:"post",
                        data: {item: JSON.stringify(item)},
                        success:function(res){
-                       document.querySelector(".food-menu .container").innerHTML='<h2 class="text-center">Food Menu</h2>'+res+'<div class="clearfix"></div>';
-                       for(const i of categories){
-                          i.querySelector('h1').style.color='white';
-                        }
-                        category.querySelector('h1').style.color='#ff6b81';
+                           for(const i of categories){
+                              i.querySelector('h1').style.color='white';
+                              i.querySelector('h1').parentElement.style.boxShadow = '';
+                            }
+                            category.querySelector('h1').style.color='#ff6b81';
+                            category.querySelector('h1').parentElement.style.boxShadow = 'pink 0px 1px 5px 2px';
+                            document.querySelector(".food-menu .container").innerHTML='<h2 class="text-center">Food Menu</h2>'+res+'<div class="clearfix"></div>';
                        }
                     })
                 }
