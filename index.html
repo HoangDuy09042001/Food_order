@@ -125,16 +125,9 @@
 
 </body>
 <script>
-    window.addEventListener('scroll', ()=>{
-        if(window.scrollY > 200){
-            document.querySelector('.scroll').style.display = "flex";
-        }else{   
-            document.querySelector('.scroll').style.display = "none";
-        }
-    })
-    document.querySelector('.scroll').addEventListener('click', ()=>{
-        document.querySelector('.scroll a').click();
-    })
+    const loadpage = 'loadpage';
+
+    // -----------------------------------------------------------------Hàm xử lý------------------------------------------------------------
     const hanleClickType = [()=>{
         if(document.querySelectorAll(".category")[0].style.backgroundImage==='url("./images/food.jpg")'){
             document.querySelectorAll(".category")[0].style.backgroundImage = 'url("./images/appetizer.jpg")';
@@ -162,12 +155,55 @@
             document.querySelectorAll(".category")[2].style.backgroundImage = 'url("./images/chip.jpg")';
             document.querySelectorAll(".category h1")[2].innerText = 'Chip';
         }
+    },()=>{
+        document.querySelectorAll(".category")[0].style.backgroundImage='url("./images/food.jpg")';
+        document.querySelectorAll(".category h1")[0].innerText = 'Food';
+        document.querySelectorAll(".category")[1].style.backgroundImage='url("./images/drink.jpg")';
+        document.querySelectorAll(".category h1")[1].innerText = 'Drink';
+        document.querySelectorAll(".category")[2].style.backgroundImage='url("./images/fastfood.jpg")';
+        document.querySelectorAll(".category h1")[2].innerText = 'FastFood';
+        document.querySelectorAll('.category h1')[0].style.color='white';
+        document.querySelectorAll('.category h1')[1].style.color='white';
+        document.querySelectorAll('.category h1')[2].style.color='white';
+        $.ajax({
+                       url:"process.php",
+                       method:"post",
+                       data: {loadpage: JSON.stringify(loadpage)},
+                       success:function(res){
+                       document.querySelector(".food-menu .container").innerHTML='<h2 class="text-center">Food Menu</h2>'+res+'<div class="clearfix"></div>';
+                       }
+                    })
+    },()=>{
+        const search = document.querySelector('.search-food-input input').value;
+        if(search===''){
+            document.querySelector('.search-content').innerHTML = '';
+        }else{
+            $.ajax({
+                           url:"process.php",
+                           method:"post",
+                           data: {search: JSON.stringify(search)},
+                           success:function(res){
+                            document.querySelector('.search-content').innerHTML = ''+res;
+                           }
+                        })
+        }
     }]
+//    ----------------------------------------------------------------------------------------------------------------------------------
+
+
+    window.addEventListener('scroll', ()=>{
+        if(window.scrollY > 200){
+            document.querySelector('.scroll').style.display = "flex";
+        }else{   
+            document.querySelector('.scroll').style.display = "none";
+        }
+    })
+    document.querySelector('.scroll').addEventListener('click', ()=>{
+        document.querySelector('.scroll a').click();
+    })
     document.querySelectorAll(".category")[0].addEventListener('click', hanleClickType[0]);
     document.querySelectorAll(".category")[1].addEventListener('click', hanleClickType[1]);
     document.querySelectorAll(".category")[2].addEventListener('click', hanleClickType[2]);
-    
-    const loadpage = 'loadpage';
     if(document.querySelector(".food-menu .container").innerText==='Food Menu'){
                     $.ajax({
                        url:"process.php",
@@ -203,24 +239,8 @@
             })
         })
     }
-    const sendRequest = ()=>{
-        const search = document.querySelector('.search-food-input input').value;
-        if(search===''){
-            document.querySelector('.search-content').innerHTML = '';
-        }else{
-            $.ajax({
-                           url:"process.php",
-                           method:"post",
-                           data: {search: JSON.stringify(search)},
-                           success:function(res){
-                            document.querySelector('.search-content').innerHTML = ''+res;
-                           }
-                        })
-        }
-
-    }
     document.querySelector('.search-food-input input').addEventListener('keyup', ()=>{
-        sendRequest();
+        hanleClickType[4]();
        
     })
     window.addEventListener('click', function(e){ 
@@ -229,8 +249,7 @@
          && !document.querySelectorAll('.category')[1].contains(e.target)
          && !document.querySelectorAll('.category')[2].contains(e.target)
        ) {
-         document.querySelector('.text-right ul li a').click();
-         console.log(e.target);
+        hanleClickType[3]();
        } 
        if (document.querySelector('.search-food').contains(e.target) || document.querySelector('.search-content').contains(e.target)){
            // search-content Clicked in box
@@ -241,7 +260,7 @@
    })
     const searchBox = document.querySelector('.search-icon');
     searchBox.addEventListener('click',()=>{
-        sendRequest();
+        hanleClickType[4]();
     })
 </script>
 </html>
