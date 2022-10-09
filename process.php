@@ -1,7 +1,5 @@
 <?php
-    include_once 'database.php';
-    require_once 'dbConfig.php'; 
-  
+    include_once 'database.php'; 
 if (isset($_POST['list']))
  {
   $del = "TRUNCATE orderfoodform";
@@ -48,6 +46,7 @@ if(isset($_POST['foodpage'])){
     </div>
 </div>';
   }
+  $conn->close();
  }
  if(isset($_POST['retrievepage'])){
   $result = mysqli_query($conn, "SELECT * FROM orderfoodform");
@@ -69,7 +68,7 @@ if(isset($_POST['foodpage'])){
         
            }
         }
-
+        $conn->close();
 }
 if (isset($_POST['bill'])){
   $res=mysqli_query($conn, "SELECT MAX(orderfood) AS maxorderfood FROM bill");
@@ -113,6 +112,7 @@ if (isset($_POST['item']))
       </div>
   </div>';
   }
+  $conn->close();
  }
  if(isset($_POST['loadpage'])){
   $it = json_decode($_POST['loadpage'], true);
@@ -132,6 +132,7 @@ if (isset($_POST['item']))
     }
     $i++;
   }
+  $conn->close();
  }
  if(isset($_POST['search'])){
   $search = json_decode($_POST['search'], true);
@@ -152,6 +153,7 @@ if (isset($_POST['item']))
 
       }
   }
+  $conn->close();
  } 
  if(isset($_POST['history'])){
   $maxresult = mysqli_query($conn, "SELECT 
@@ -208,6 +210,7 @@ echo '<tr>
 <td colspan="3" class="total" style="font-weight:bold;">Total: $' .$total. '</td>
 <td colspan="1" class="date" style="font-weight:bold;">' .$date. '</td>
 </tr>';
+$conn->close();
  }
 ?>
 
