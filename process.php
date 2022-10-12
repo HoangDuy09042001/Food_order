@@ -182,7 +182,7 @@ if (isset($_POST['item']))
     $type = $row['typeFood'];
     echo '<div class="food-menu-box" style="background-image:url(\'data:image/jpg;charset=utf8;base64,'.base64_encode($row["image"]).'\');">
   
-    <div class="food-menu-desc" id="food-menu-desc' .$row['id']. ' ">
+    <div class="food-menu-desc" id="food-menu-desc' .$row['id']. ' " typefood=" '.$row['typeFood'].' ">
         <h4 class="food-name">'. $row['foodName'] . '</h4>
         <p class="food-price">$'.$row['foodPrice'] . '</p>
         <p class="food-detail">' . $row['foodDes'] . '</p>
@@ -196,7 +196,7 @@ if (isset($_POST['item']))
     if( $row['foodName']!==$valueItemSearch){
       echo '<div class="food-menu-box" style="background-image:url(\'data:image/jpg;charset=utf8;base64,'.base64_encode($row["image"]).'\');">
     
-                  <div class="food-menu-desc" id="food-menu-desc' .$row['id']. ' ">
+                  <div class="food-menu-desc" id="food-menu-desc' .$row['id']. ' " typefood=" '.$row['typeFood'].' ">
                       <h4 class="food-name">'. $row['foodName'] . '</h4>
                       <p class="food-price">$'.$row['foodPrice'] . '</p>
                       <p class="food-detail">' . $row['foodDes'] . '</p>

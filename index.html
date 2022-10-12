@@ -129,32 +129,32 @@
 
     // -----------------------------------------------------------------Hàm xử lý------------------------------------------------------------
     const hanleClickType = [()=>{
-        if(document.querySelectorAll(".category")[0].style.backgroundImage==='url("./images/food.jpg")'){
+        
             document.querySelectorAll(".category")[0].style.backgroundImage = 'url("./images/appetizer.jpg")';
             document.querySelectorAll(".category h1")[0].innerText = 'Appetizer';
             document.querySelectorAll(".category")[1].style.backgroundImage = 'url("./images/maincourses.jpg")';
             document.querySelectorAll(".category h1")[1].innerText = 'Maincourses';
             document.querySelectorAll(".category")[2].style.backgroundImage = 'url("./images/desserts.jpg")';
             document.querySelectorAll(".category h1")[2].innerText = 'Desserts';
-        }
+        
     },()=>{
-        if(document.querySelectorAll(".category")[1].style.backgroundImage==='url("./images/drink.jpg")'){
+        
             document.querySelectorAll(".category")[0].style.backgroundImage = 'url("./images/smoothie.jpg")';
             document.querySelectorAll(".category h1")[0].innerText = 'Smoothie';
             document.querySelectorAll(".category")[1].style.backgroundImage = 'url("./images/juice.jpg")';
             document.querySelectorAll(".category h1")[1].innerText = 'Juice';
             document.querySelectorAll(".category")[2].style.backgroundImage = 'url("./images/alcohol.jpg")';
             document.querySelectorAll(".category h1")[2].innerText = 'Alcohol';
-        }
+        
     },()=>{
-        if(document.querySelectorAll(".category")[2].style.backgroundImage==='url("./images/fastfood.jpg")'){
+        
             document.querySelectorAll(".category")[0].style.backgroundImage = 'url("./images/hamburger.jpg")';
             document.querySelectorAll(".category h1")[0].innerText = 'Hamburger';
             document.querySelectorAll(".category")[1].style.backgroundImage = 'url("./images/sausage.jpg")';
             document.querySelectorAll(".category h1")[1].innerText = 'Sausage';
             document.querySelectorAll(".category")[2].style.backgroundImage = 'url("./images/chip.jpg")';
             document.querySelectorAll(".category h1")[2].innerText = 'Chip';
-        }
+        
     },()=>{
         document.querySelectorAll(".category")[0].style.backgroundImage='url("./images/food.jpg")';
         document.querySelectorAll(".category h1")[0].innerText = 'Food';
@@ -197,11 +197,22 @@
                                         document.querySelector(".food-menu .container").innerHTML=`<h2 class="text-center">Food Menu</h2>${res}<div class="clearfix"></div>`;
                                         const nameFoods = document.querySelectorAll('.food-menu-desc');
                                         let idFood = '';
+                                        let type = '';
                                         for (const nameFood of nameFoods) {
                                             if(nameFood.querySelector('h4').innerText===valueItemSearch){
                                                 idFood = nameFood.getAttribute('id');
+                                                type = nameFood.getAttribute('typefood');
                                                 break;
                                             }
+                                        }
+                                        console.log(typeof(type));
+                                        console.log(type=='Maincourses')
+                                        if(type.includes('Appetizer')||type.includes('Maincourses')||type.includes('Desserts')){
+                                            hanleClickType[0]();
+                                        }else if(type.includes('Smoothie')||type.includes('Juice')||type.includes('Alcohol')){
+                                            hanleClickType[1]();
+                                        }else if(type.includes('Hamburger')||type.includes('Sausage')||type.includes('Chip')){
+                                            hanleClickType[2]();
                                         }
                                         document.querySelector('.food-menu').scrollIntoView();
                                     }
@@ -227,9 +238,9 @@
     document.querySelector('.scroll').addEventListener('click', ()=>{
         document.querySelector('.scroll a').click();
     })
-    document.querySelectorAll(".category")[0].addEventListener('click', hanleClickType[0]);
-    document.querySelectorAll(".category")[1].addEventListener('click', hanleClickType[1]);
-    document.querySelectorAll(".category")[2].addEventListener('click', hanleClickType[2]);
+    document.querySelectorAll(".category")[0].addEventListener('click',()=>{if(document.querySelectorAll(".category")[0].style.backgroundImage==='url("./images/food.jpg")')hanleClickType[0]();}) 
+    document.querySelectorAll(".category")[1].addEventListener('click',()=>{if(document.querySelectorAll(".category")[1].style.backgroundImage==='url("./images/drink.jpg")')hanleClickType[1]();})
+    document.querySelectorAll(".category")[2].addEventListener('click',()=>{if(document.querySelectorAll(".category")[2].style.backgroundImage==='url("./images/fastfood.jpg")')hanleClickType[2]();})
     if(document.querySelector(".food-menu .container").innerText==='Food Menu'){
                     $.ajax({
                        url:"process.php",
