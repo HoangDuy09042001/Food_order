@@ -178,15 +178,41 @@
         if(search===''){
             document.querySelector('.search-content').innerHTML = '';
         }else{
-            $.ajax({
+            const renderData = () => {
+                $.ajax({
                            url:"process.php",
                            method:"post",
                            data: {search: JSON.stringify(search)},
-                           success:function(res){
-                            document.querySelector('.search-content').innerHTML = ''+res;
+                           success: function(res){
+                                document.querySelector('.search-content').innerHTML = ''+res;
+                                const searchItems = document.querySelectorAll('.search-content-item');
+                                for (const searchItem of searchItems) {
+                                searchItem.addEventListener('click',()=>{
+                                const valueItemSearch = searchItem.innerText;
+                                $.ajax({
+                                    url:"process.php",
+                                    method:"post",
+                                    data: {valueItemSearch: JSON.stringify(valueItemSearch)},
+                                    success:function(res){
+                                        document.querySelector(".food-menu .container").innerHTML=`<h2 class="text-center">Food Menu</h2>${res}<div class="clearfix"></div>`;
+                                        const nameFoods = document.querySelectorAll('.food-menu-desc');
+                                        let idFood = '';
+                                        for (const nameFood of nameFoods) {
+                                            if(nameFood.querySelector('h4').innerText===valueItemSearch){
+                                                idFood = nameFood.getAttribute('id');
+                                                break;
+                                            }
+                                        }
+                                        document.querySelector('.food-menu').scrollIntoView();
+                                    }
+                                  })
+
+                                })
                            }
-                        })
-        }
+                        }});
+                    }
+            renderData();
+            }
     }]
 //    ----------------------------------------------------------------------------------------------------------------------------------
 
