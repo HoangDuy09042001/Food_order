@@ -214,6 +214,8 @@
                                         }else if(type.includes('Hamburger')||type.includes('Sausage')||type.includes('Chip')){
                                             hanleClickType[2]();
                                         }
+                                        document.querySelector('.search-content').innerHTML = '';
+                                        document.querySelector('.search-food-input input').value = '';
                                         document.querySelector('.food-menu').scrollIntoView();
                                     }
                                   })
