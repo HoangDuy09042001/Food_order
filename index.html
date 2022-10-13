@@ -205,8 +205,12 @@
                                                 break;
                                             }
                                         }
-                                        console.log(typeof(type));
-                                        console.log(type=='Maincourses')
+                                        const itemSearch = document.querySelector('.food-menu-box');
+                                        itemSearch.style.boxShadow = '#c22c9e 0px 2px 5px 6px';
+
+                                        document.querySelectorAll('.category h1')[0].style.color='white';
+                                        document.querySelectorAll('.category h1')[1].style.color='white';
+                                        document.querySelectorAll('.category h1')[2].style.color='white';
                                         if(type.includes('Appetizer')||type.includes('Maincourses')||type.includes('Desserts')){
                                             hanleClickType[0]();
                                         }else if(type.includes('Smoothie')||type.includes('Juice')||type.includes('Alcohol')){
@@ -216,7 +220,7 @@
                                         }
                                         document.querySelector('.search-content').innerHTML = '';
                                         document.querySelector('.search-food-input input').value = '';
-                                        document.querySelector('.food-menu').scrollIntoView();
+                                        document.querySelector('.food-menu').scrollIntoView({behavior: 'smooth'});
                                     }
                                   })
 
